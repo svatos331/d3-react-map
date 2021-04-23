@@ -1,0 +1,49 @@
+h1, p {
+  font-family: Lato;
+}
+body{
+  background-color: #eee;
+}
+
+#root{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.category_1{
+  background-color: #b32f4a
+}
+
+.category_2{
+  background-color: #d7313e
+}
+
+.category_3{
+  background-color: #f97041
+}
+
+.category_4{
+  background-color: #faa247
+}
+.category_5{
+  background-color: #acd6a9
+}
+
+
+.window{
+  width: 300px;
+  background: red;
+  position: fixed;
+  right: 0;
+  top: 0;
+  font-family: sans-serif;
+}
+.window > div{
+  padding: 10px;
+}
+
+
+circle.circle {
+  transform: translate(-80%, -316%);
+}
