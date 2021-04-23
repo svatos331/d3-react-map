@@ -1,10 +1,31 @@
+/*@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');*/
+/*@import url('assets/Roboto/Roboto-Regular.ttf');*/
+@font-face {
+  font-family: "Roboto";
+  src: url("assets/Roboto/Roboto-Regular.ttf") format("truetype")
+}
+* {
+  font-family: 'Roboto', sans-serif;
+}
 h1, p {
-  font-family: Lato;
+  font-family: Roboto;
 }
 body{
   background-color: #eee;
 }
 
+.title {
+  position: absolute;
+  margin: 0 auto;
+  top: 5vh;
+  background-color: #444444;
+  font-size: 45px;
+  color: white;
+  border-radius: 15px;
+  padding: 6px 12px 6px 12px;
+  text-transform: uppercase;
+  /*font-family: 'Roboto', sans-serif;*/
+}
 #root{
   display: flex;
   justify-content: center;
@@ -46,4 +67,8 @@ body{
 
 circle.circle {
   transform: translate(-80%, -316%);
+}
+#boroughs-map {
+  width: 100vw;
+  height: 100vh;
 }

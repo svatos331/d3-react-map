@@ -14,7 +14,7 @@ const category_4 = `#faa247`
 const category_5 = `#acd6a9`
 
 
-export default function Map({points}) {
+export default function Map_old({points}) {
 
   const geojsonPoints = points.data
 
