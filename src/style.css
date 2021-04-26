@@ -12,6 +12,7 @@ h1, p {
 }
 body{
   background-color: #eee;
+  overflow: hidden;
 }
 
 .title {
@@ -24,7 +25,8 @@ body{
   border-radius: 15px;
   padding: 6px 12px 6px 12px;
   text-transform: uppercase;
-  /*font-family: 'Roboto', sans-serif;*/
+  z-index: 9999999;
+  overflow: hidden;
 }
 #root{
   display: flex;

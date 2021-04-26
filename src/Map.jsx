@@ -42,11 +42,19 @@ const randomColor = () => {
 }
 
 
+
+
+
+
 const Map = (props) => {
+
+
     // const [{ data }] = useDataApi(url,[]);
     const data = geojson
     const svgRef = useRef();
     const projRef = useRef(d3.geoMercator().center([32.07, 49.23]).scale(4700));
+
+    // console.log(projRef)
 
     // CREATES THE PROJECTION AND RENDERS CHART AND PARKS
     useEffect(() => {
@@ -74,15 +82,21 @@ const Map = (props) => {
 
 // RENDER THE MAP
 
+
+
+
+
     const renderChart = (data, path) => {
-        d3.select(svgRef.current).selectAll('path').data(data).enter()
+
+     let g =  d3.select(svgRef.current).selectAll('path').data(data).enter()
             .append('path')
             .attr('class', (d) => {
-
                 return d.properties.name
             })
             .attr('d', path)
             .attr('stroke', 'black')
+        
+
             .style('fill', (d) => '#f5f5dc')
             .attr('title', (d) => d.properties.name)
             .on('mouseout', (e) => {
@@ -94,11 +108,17 @@ const Map = (props) => {
                 props.titleHandler({show: true, text: e.target.getAttribute('title')})
                 select(e.target)
                     .attr('opacity', '0.7')
-
             })
+            // .call(d3.zoom()
+            //     .extent([[0, 0], [1000, 1000]])
+            //     .scaleExtent([1, 8])
+            //     .on("zoom", zoomed));
 
 
     };
+
+
+    
 
 // RENDER THE PARKS
     const renderParks = (parks) => {
@@ -125,8 +145,18 @@ const Map = (props) => {
             .transition().duration(500).style('opacity', 0).remove()
     };
 
+
+    function zoomed({ transform }) {
+        d3.select(svgRef.current).attr("transform", transform);
+    }
+    const xg = d3.select(svgRef.current).call(d3.zoom()
+        // .extent([[0, 0], [1000, 1000]])
+        // .scaleExtent([1, 8])
+        .on("zoom", zoomed));
+
+
     return (
-        <svg id="boroughs-map" ref={svgRef}></svg>
+        <svg style={{"transition":" 0.8s"}}  id="boroughs-map" ref={svgRef}></svg>
     );
 };
 
