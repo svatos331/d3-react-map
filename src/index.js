@@ -14,10 +14,11 @@ const [pointsLists, pointsTodos] = React.useState([]);
 const [loading, setLoading] = React.useState(true);
 const [title, setTitle] = useState({
     show: false,
-    text: ''
+    text: '',
+    air: ''
 })
-    const titleHandler = (title) => {
-    setTitle(title)
+    const titleHandler = (title, indexAir) => {
+    setTitle(title,indexAir)
     }
 
     const mapRef = useRef();
@@ -41,7 +42,7 @@ useEffect(()=> {
 
   return (
     <>
-        {title.show ? <div className="title">{title.text}</div>: null }
+        {title.show ? <div className="title">{title.text} : {title.air}</div>: null }
 
        <div className="window">
         <div className="category_1">

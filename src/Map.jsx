@@ -130,11 +130,16 @@ const Map = (props) => {
                 props.titleHandler({show: false, text: ''})
             })
             .on('mouseenter', (e) => {
-                props.titleHandler({show: true, text: e.target.getAttribute('title')})
+               
+                props.titleHandler({show: true, air: e.target.getAttribute('data-air'),  text: e.target.getAttribute('title')})
             })
             .attr('class', (d, i) => `parks park-${d.id}`)
             .attr('title', (d) => {
                 return d.cityName
+            })
+            .attr('data-air', (d) => {
+                return d.pollutants[d.pollutants.length - 1] ? d.pollutants[d.pollutants.length - 1].value : null
+              
             })
             .style('fill', (d) => paramsColors(d.pollutants[d.pollutants.length - 1].value))
             .style('opacity', 0)
@@ -145,8 +150,6 @@ const Map = (props) => {
     function zoomed({ transform }) {
         d3.select(svgRef.current).selectAll('path').attr("transform", transform);
         d3.select(svgRef.current).selectAll('g').attr("transform", transform);
-
-    
     }
     const xg = d3.select(svgRef.current).call(d3.zoom()
         .extent([[0, 0], [10000000, 1000000]])
