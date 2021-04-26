@@ -48,6 +48,18 @@ const randomColor = () => {
 
 const Map = (props) => {
 
+    const [zoom, setZoom] = useState({
+        zoom: '1'
+    })
+
+    const zoomHandler = (newZoom) => {
+        // zoom.zoom > newZoom? setZoom(newZoom,(zoom.scale - 0.4)) : setZoom(newZoom,(zoom.scale + 0.4))
+
+        return (4 - newZoom/2) < 0.5? 0.5: (4 - newZoom/2)
+    }
+
+
+
 
     // const [{ data }] = useDataApi(url,[]);
     const data = geojson
@@ -146,10 +158,18 @@ const Map = (props) => {
             .transition().duration(500).style('opacity',1)
     };
 
+    
+
 
     function zoomed({ transform }) {
         d3.select(svgRef.current).selectAll('path').attr("transform", transform);
         d3.select(svgRef.current).selectAll('g').attr("transform", transform);
+        d3.select(svgRef.current).selectAll('circle').attr('r', zoomHandler(transform.k));
+
+ 
+        
+
+
     }
     const xg = d3.select(svgRef.current).call(d3.zoom()
         .extent([[0, 0], [10000000, 1000000]])
