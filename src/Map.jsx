@@ -117,14 +117,14 @@ const Map = (props) => {
 
     };
 
-
+    // .split(',')[0]
     
 
 // RENDER THE PARKS
     const renderParks = (parks) => {
         const circles = d3.select(svgRef.current).selectAll('.parks').data(parks, (d) => d.name);
-        circles.enter().append('circle')
-            .attr('transform', d => 'translate(' + projRef.current([+d.longitude, +d.latitude]) + ')')
+        circles.enter().append('g').append('circle')
+            .attr('transform', d => 'translate(' + projRef.current([+d.longitude, +d.latitude]) + ')') 
             .attr('r', 4)
             .on('mouseout', (e) => {
                 props.titleHandler({show: false, text: ''})
@@ -139,24 +139,23 @@ const Map = (props) => {
             .style('fill', (d) => paramsColors(d.pollutants[d.pollutants.length - 1].value))
             .style('opacity', 0)
             .transition().duration(500).style('opacity',1)
-
-
-        circles.exit()
-            .transition().duration(500).style('opacity', 0).remove()
     };
 
 
     function zoomed({ transform }) {
-        d3.select(svgRef.current).attr("transform", transform);
+        d3.select(svgRef.current).selectAll('path').attr("transform", transform);
+        d3.select(svgRef.current).selectAll('g').attr("transform", transform);
+
+    
     }
     const xg = d3.select(svgRef.current).call(d3.zoom()
-        // .extent([[0, 0], [1000, 1000]])
+        .extent([[0, 0], [10000000, 1000000]])
         // .scaleExtent([1, 8])
         .on("zoom", zoomed));
 
 
     return (
-        <svg style={{"transition":" 0.8s"}}  id="boroughs-map" ref={svgRef}></svg>
+        <svg style={{"transition":" 0.8s"}} width={10} height={10}  id="boroughs-map" ref={svgRef}></svg>
     );
 };
 
