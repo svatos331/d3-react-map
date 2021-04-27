@@ -11,14 +11,6 @@ function App() {
   const [loading, setLoading] = React.useState(true);
   const [title, setTitle] = useState({
     show: false,
-<<<<<<< HEAD
-    text: '',
-    air: ''
-})
-    const titleHandler = (title, indexAir) => {
-    setTitle(title,indexAir)
-    }
-=======
     text: "",
     air: "",
   });
@@ -29,7 +21,6 @@ function App() {
   const titleHandler = (title) => {
     setTitle(title);
   };
->>>>>>> pr/2
 
   const mapRef = useRef();
 
@@ -48,11 +39,7 @@ function App() {
 
   return (
     <>
-<<<<<<< HEAD
-        {title.show ? <div className="title">{title.text} : {title.air}</div>: null }
-=======
       {title.show ? <div className="title">{title.text}</div> : null}
->>>>>>> pr/2
 
       <Popup info={info} />
       <div className="window">
