@@ -74,3 +74,14 @@ circle.circle {
   width: 100vw;
   height: 100vh;
 }
+.city {
+  position: relative;
+}
+.city:after {
+  position: absolute;
+  right: 0;
+  content: 'Город';
+  color: black;
+  font-size: 40px;
+  z-index: 1000;
+}

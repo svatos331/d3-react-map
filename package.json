@@ -19,6 +19,7 @@
     "server:install": "npm install --prefix back"
   },
   "devDependencies": {
+    "prettier": "^2.2.1",
     "react-scripts": "latest"
   },
   "browserslist": {
