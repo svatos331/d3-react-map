@@ -74,3 +74,62 @@ circle.circle {
   width: 100vw;
   height: 100vh;
 }
+.city {
+  position: relative;
+}
+.city:after {
+  position: absolute;
+  right: 0;
+  content: 'Город';
+  color: black;
+  font-size: 40px;
+  z-index: 1000;
+}
+
+.popup {
+  width: 281px;
+  background-color: white;
+  color: #333;
+  box-shadow: 0 3px 14px rgb(0 0 0 / 40%);
+  padding: 14px;
+  border-radius: 13px;
+  position: absolute;
+  top: 10vh;
+  left: 10vw;
+  display: flex;
+  flex-direction: column;
+}
+.marker {
+  width: 70px;
+  border-radius: 5px;
+  font-size: 24px;
+  color: white;
+  padding: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 15px;
+}
+.marker_aqi {
+  font-size: 11px;
+}
+.marker_header {
+  display: flex;
+  /*flex-direction: column;*/
+}
+.marker_header__title {
+  font-size: 16px;
+  line-height: 18px;
+  font-weight: bold;
+display: flex;
+  flex-direction: column;
+}
+
+.marker_header_time {
+  font-size: 12px;
+}
+.popup_body {
+  margin-top: 17px;
+  display: flex;
+  /*flex-direction: column;*/
+}
