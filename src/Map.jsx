@@ -136,6 +136,9 @@ const Map = (props) => {
           text: e.target.getAttribute("title"),
         });
       })
+      .on("click", (e) => {
+        props.infoHandler(e.target.dataset.point);
+      })
       .attr("class", (d, i) => `parks park-${d.id}`)
       .attr("title", (d) => {
         return d.cityName;
@@ -145,13 +148,15 @@ const Map = (props) => {
           ? d.pollutants[d.pollutants.length - 1].value
           : null;
       })
+      .attr("data-point", (d) => JSON.stringify(d))
       .style("fill", (d) =>
         paramsColors(d.pollutants[d.pollutants.length - 1].value)
       )
       .style("opacity", 0)
       .transition()
       .duration(500)
-      .style("opacity", 1);
+      .style("opacity", 1)
+      .style("cursor", "pointer");
   };
 
   const renderCties = (cities) => {
@@ -208,31 +213,13 @@ const Map = (props) => {
         "transform",
         (d) => "translate(" + projRef.current([+d.lng, +d.lat]) + ")"
       )
-      .text((d) => d.name)
+      .text((d) => "- " + d.name)
       .transition()
-      // .attr("class", () => "class")
-      // .attr("r", 4)
-      // .on("mouseout", (e) => {
-      //   props.titleHandler({ show: false, text: "" });
-      // })
-      // .on("mouseenter", (e) => {
-      //   props.titleHandler({
-      //     show: true,
-      //     air: e.target.getAttribute("data-air"),
-      //     text: e.target.getAttribute("title"),
-      //   });
-      // })
-      // .attr("class", (d, i) => `parks park-${d.name} city`)
-      // // .attr("style", (d, i) => `parks park-${d.name} city`)
+
       .attr("title", (d) => {
         return d.name;
       })
-      // .text(() => "город")
-      // .attr("data-air", (d) => {
-      //     return d.pollutants[d.pollutants.length - 1]
-      //         ? d.pollutants[d.pollutants.length - 1].value
-      //         : null;
-      // })
+      .attr("font-size", 8)
       .style("fill", (d) => "#00000")
       .style("opacity", 0)
       .transition()
@@ -248,7 +235,7 @@ const Map = (props) => {
       .attr("r", zoomHandler(transform.k));
     d3.select(svgRef.current)
       .selectAll("text")
-      .attr("font-size", zoomHandler(transform.k) * 6);
+      .attr("font-size", zoomHandler(transform.k) * 2);
   }
   const xg = d3.select(svgRef.current).call(
     d3

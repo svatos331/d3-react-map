@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { render } from "react-dom";
 // import Map_old from "./Map_old";
 import Map from "./Map";
+import { Popup } from "./Popup";
 import "./style.css";
 import Loader from "./Loader";
 
@@ -13,6 +14,10 @@ function App() {
     text: "",
     air: "",
   });
+  const [info, setInfo] = useState();
+  const infoHandler = (data) => {
+    setInfo(data);
+  };
   const titleHandler = (title) => {
     setTitle(title);
   };
@@ -36,6 +41,7 @@ function App() {
     <>
       {title.show ? <div className="title">{title.text}</div> : null}
 
+      <Popup info={info} />
       <div className="window">
         <div className="category_1">AQI: от 100 до макс</div>
         <div className="category_2">AQI: от 90 до 120</div>
@@ -49,7 +55,11 @@ function App() {
       {/*{pointsLists.length ? <Map_old data={pointsLists}/> : null}*/}
       {!loading ? (
         <div id="map" ref={mapRef}>
-          <Map data={pointsLists} titleHandler={titleHandler} />
+          <Map
+            data={pointsLists}
+            titleHandler={titleHandler}
+            infoHandler={infoHandler}
+          />
         </div>
       ) : null}
     </>
